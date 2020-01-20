@@ -6,4 +6,5 @@ Link: apex.oracle.com </br>
 Workspace/username/password:  sullivan-c137/demo/Demo_123
 
 ## instant row processing
-Sample row report processing, client side.
+Sample row report processing, client side. </br>
+demo: https://apex.oracle.com/pls/apex/f?p=35201
