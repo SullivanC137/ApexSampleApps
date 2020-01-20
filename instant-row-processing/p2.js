@@ -1,4 +1,5 @@
-// link:https://apexplained.wordpress.com/2012/02/12/instant-row-deletion-from-report/
+// JS code, exclusively loaded and called from page 2, Sample App - Instant row processing
+// Calls page ajax processes
 
 var apprCount = 0;
 var rejCount = 0;
@@ -151,8 +152,33 @@ function processRow(pSelector) {
   });
 }
 
+//Function getTotalValues gets total rows and is executes on page load
+function getTotalValues() {
+  $.ajax({                                                        // perform an asynchronous HTTP AJAX request using jQuery
+    type: 'POST',
+    url: 'wwv_flow.show',
+    data: {
+      p_flow_id: $('#pFlowId').val(),
+      p_flow_step_id: $('#pFlowStepId').val(),
+      p_instance: $('#pInstance').val(),
+      p_request: 'APPLICATION_PROCESS=P2_GET_TOTAL_VALUES'   // reference the application process
+    },
+    success:                                                 // to be called if the request succeeds
+      function (pData) {
+        apprCount = pData.output[0].l_total_approved;
+        rejCount = pData.output[0].l_total_rejected;
+        changeRegionHeaders(p2Const.status.approved)
+        changeRegionHeaders(p2Const.status.rejected)
+        changeTabLabels(p2Const.status.approved)
+        changeTabLabels(p2Const.status.rejected)
+        changesaveButton(apprCount + rejCount)
+      }
+
+  })
+}
+
 // Constant p2 serves as the API to the Application Builder
-// Object structure reflects event listeners and event types
+// Object structure aims to reflect event listeners, event types, call timing etc
 const p2 = {
   dynamicAction: {
     onClick: {
@@ -160,5 +186,12 @@ const p2 = {
         processRow(pTriggeringElement);
       }
     }
+  },
+  executeWhenPageLoads: function(){
+    getTotalValues()
   }
 };
+
+// Sources:
+// link:https://apexplained.wordpress.com/2012/02/12/instant-row-deletion-from-report/
+// https://explorer.co.uk/calling-plsql-from-javascript/
