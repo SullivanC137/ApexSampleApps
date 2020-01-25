@@ -1,5 +1,5 @@
 # Description
-
+![screenshot](irp-1.gif)
 ## Page 2, contents:
 - Javascript Code, also defined in [p2.js](/p2.js)
 - Ajax callback processes
