@@ -28,7 +28,7 @@ prompt APPLICATION 58677 - Sample - Logo from blob column
 -- Application Export:
 --   Application:     58677
 --   Name:            Sample - Logo from blob column
---   Date and Time:   08:38 Friday August 7, 2020
+--   Date and Time:   09:11 Friday August 7, 2020
 --   Exported By:     KROMOSOETO.S@GMAIL.COM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -116,7 +116,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Sample - Logo from blob column'
 ,p_last_updated_by=>'KROMOSOETO.S@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20200807080828'
+,p_last_upd_yyyymmddhh24miss=>'20200807091011'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>4
 ,p_ui_type_name => null
@@ -11456,7 +11456,7 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'KROMOSOETO.S@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20200807080828'
+,p_last_upd_yyyymmddhh24miss=>'20200807091011'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(19408765353288601038)
@@ -11468,8 +11468,12 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p> The goal of this app is to show how it is possible to use an image in a blob column as the application logo </p>',
-'<p> For this functionality, we create a public page which servers as the download link. </p>',
-'<p> Be advised, implementing logo''s this way can make your app slower as APEX will have to fetch a row out of the logos table for every page load. </p>'))
+'<p> For this functionality, we create a public page which serves as the download link. </p>',
+'<p> Be advised, implementing logo''s this way can make your app slower as APEX will have to fetch a row out of the logos table for every page load. </p>',
+'<div>Default Chameleon Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>',
+'</br>',
+'</br>',
+'<p> Requested by Jason Choi </p>'))
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'HTML'
@@ -11484,7 +11488,8 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'REGION_POSITION_01'
 ,p_plug_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p> A sample application to use an image from a blob column as application logo </p>',
-'<p> Requested by Jason Choi </p>',
+'',
+'',
 ''))
 ,p_plug_query_num_rows=>15
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
