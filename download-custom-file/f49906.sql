@@ -28,7 +28,7 @@ prompt APPLICATION 49906 - Sample App - create text file to download
 -- Application Export:
 --   Application:     49906
 --   Name:            Sample App - create text file to download
---   Date and Time:   10:32 Monday August 24, 2020
+--   Date and Time:   11:23 Monday August 24, 2020
 --   Exported By:     KROMOSOETO.S@GMAIL.COM
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -114,7 +114,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'Sample App - create text file to download'
 ,p_last_updated_by=>'KROMOSOETO.S@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20200824103136'
+,p_last_upd_yyyymmddhh24miss=>'20200824112238'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>3
 ,p_ui_type_name => null
@@ -10864,7 +10864,7 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'KROMOSOETO.S@GMAIL.COM'
-,p_last_upd_yyyymmddhh24miss=>'20200824102339'
+,p_last_upd_yyyymmddhh24miss=>'20200824112238'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(35437403898862461305)
@@ -10881,9 +10881,17 @@ wwv_flow_api.create_page_process(
 '  o2 integer;',
 '  c integer;',
 '  w integer;',
+'  cursor c_example is',
+'  SELECT LEVEL row_number',
+'  FROM dual',
+'  CONNECT BY LEVEL <= 10',
+'  ;',
 'begin  ',
 '  --create file content',
-'  l_file_clob := :P1_STARTDATE||'',''||:P1_ENDDATE||'',some other value''; ',
+'  l_file_clob := ''row_number,start_date,end_date,text''||chr(13)||chr(10);',
+'  for row in c_example loop',
+'  l_file_clob := l_file_clob||row.row_number||'',''||:P1_STARTDATE||'',''||:P1_ENDDATE||'',some other value''||chr(13)||chr(10);',
+'  end loop;',
 '  l_extension := ''.csv'';',
 '  -- convert to blob',
 '  o1 := 1;',
@@ -10899,7 +10907,7 @@ wwv_flow_api.create_page_process(
 '    false  ',
 '  );  ',
 '  htp.p(''Content-length: '' ||sys.dbms_lob.getlength(l_file_blob) );  ',
-'  htp.p(''Content-Disposition: attachment; filename="'' || upper(:P999_BRE_NAME) ||l_extension|| ''"'');  ',
+'  htp.p(''Content-Disposition: attachment; filename="'' || ''example_csv-file'' ||l_extension|| ''"'');  ',
 '  --htp.p(''Cache-Control: max-age=3600'');  -- tell the browser to cache for one hour,adjust as necessary  ',
 '  owa_util.http_header_close;  ',
 '  wpg_docload.download_file(l_file_blob);',
